@@ -1,0 +1,3 @@
+###PowerShell Script for Reboot of server#####
+
+$Server_List= 
