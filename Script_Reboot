@@ -1,3 +1,19 @@
 ###PowerShell Script for Reboot of server#####
 
-$Server_List= 
+$Server_List = Get-Content -Path C:\Temp\Server_list.txt
+
+Foreach($VM in $Server_List){
+
+  $Ping_Status = Test-Connection -ComputerName $VM -Count 2 -quiet
+  if($Ping_Status -eq 'True')
+    {
+        $Reboot_Status = Stop-VM -Name $VM -confirm:$false
+        Write-host Server is rebooting :$VM -Forgroundcolor Yellow
+    }
+  else
+    {
+       Write-Host "Server is in Error state. Check the Server:" $VM -Forgroundcolor Cyan
+    }
+      
+
+}
