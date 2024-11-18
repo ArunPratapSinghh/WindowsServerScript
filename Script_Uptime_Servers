@@ -2,12 +2,11 @@
 
 #list of servers
 $Server_List = get-content ./server_list
+$date = get-date
 
 #loop to get the uptime
 foreach($VM in $Server_List){
 
     $uptime = get-wmiobject -class win32_operatingsystem -ComputerName $VM |Select-Object PSComputerName ,Uptime
     
-
-
 }
