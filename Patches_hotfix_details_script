@@ -7,7 +7,7 @@ $patch_list = @()
 foreach($VM in List){
   $Connection = Test-connection -computerName $VM -count 2 -quiet
 try{
-    $patch_details = Get-hotfix -computer $VM -id $patch_list
+    $patch_details = Get-hotfix -computer $VM -id $patch_list |where-object {$_.HotfixID -eq "*KB*"}
     Write-Host "Hotfix has been installed :$patch_detials" -newline -forgroundcolor Green
 
 }catch
