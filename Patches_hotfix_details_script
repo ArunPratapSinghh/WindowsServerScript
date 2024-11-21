@@ -1,0 +1,18 @@
+###hotfix details###
+
+$list = Get-Content -path ./server_list.txt
+
+$patch_list = @()
+
+foreach($VM in List){
+  $Connection = Test-connection -computerName $VM -count 2 -quiet
+try{
+    $patch_details = Get-hotfix -computer $VM -id $patch_list
+    Write-Host "Hotfix has been installed :$patch_detials" -newline -forgroundcolor Green
+
+}catch
+{  
+    Write-host "Server is not accessible :$VM" -forgroundcolor Red
+}
+  $Patch_Details ||Select-Object PSComputerName, HotFixID , InstalledON , InstalledBy |Format-Table|Sort -Descending
+}
