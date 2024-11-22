@@ -1,18 +1,20 @@
-###hotfix details###
+###Patching details###
 
 $list = Get-Content -path ./server_list.txt
 
-$patch_list = @()
+$patch_list = @('KB5044277')
 
 foreach($VM in List){
   $Connection = Test-connection -computerName $VM -count 2 -quiet
+if($Connection -eq 'True'){
 try{
     $patch_details = Get-hotfix -computer $VM -id $patch_list |where-object {$_.HotfixID -eq "*KB*"}
-    Write-Host "Hotfix has been installed :$patch_detials" -newline -forgroundcolor Green
-
-}catch
+  }catch
 {  
     Write-host "Server is not accessible :$VM" -forgroundcolor Red
 }
-  $Patch_Details ||Select-Object PSComputerName, HotFixID , InstalledON , InstalledBy |Format-Table|Sort -Descending
+else{
+  Write-host "Server is not Pingable :$VM" -forgroundcolor Red
+}
+  $Patch_Details |Select-Object PSComputerName, HotFixID , InstalledON , InstalledBy -Append |Format-Table|Sort -Descending
 }
