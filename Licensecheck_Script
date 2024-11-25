@@ -1,1 +1,11 @@
 ###Script for license Check#########
+
+$list = get-content -path ./License_server.txt
+
+#license check
+Foreach($VM in $list){
+
+
+
+
+}
