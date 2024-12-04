@@ -1,0 +1,48 @@
+##Package list in Servers###
+
+#Clear Command Screen
+Clear-Host
+
+#prompt user to enter the package Name
+$Package_Name = Read-host "Enter the software name to be Searched" 
+
+Write-Host "Script to find the package:$PackageName and version from the servers" -forgroundcolor Green
+
+#output file paths
+$PackageServerPaths = "D:\Arun\Package_list.txt"
+$OfflineServerPaths = "D:\Arun\Offline_Servers.txt"
+
+#Read servers list from file
+$Server_List = Get-content -path D:\Arun\List.txt
+
+#Initializae output files
+New-item -Path $PackageServerPaths -ItemType File -Force |out-Null
+New-Item -Path OfflineServerPaths -ItemType File -Force |Out-Null
+
+#Process Each servers
+Foreach($VM in $Server_List){
+
+    #Test if each server is reachable
+    $Status_Ping = Test-connection -computerName $VM -count 2 -quiet
+
+    if($Status_Ping -imatch 'true'){
+
+          Write-Host "Server $VM is reachable .Attempting to Search the package $PackageName in VM " -Forgroundcolor Cyan
+          try{
+          $Package_Status = Invoke-command -computerName $VM -scriptblock {
+                              Get-package -Name "$Pckage_Name" |Select-Object Name,Version,InstallDate,Publiser
+            } -ArgumentList $PackageName -ErrorAction Stop
+
+          Write-host  "  Package $Package_Name has been Found successfully from server $VM -forgroundcolor -Green
+          Add-content -Path $PackageServerPaths -Value $VM
+          catch{
+                Write-host  "  Failed to Search the package -forgroundcolor -Red
+              }
+        }
+        Else{
+                Write-host Server $VM is not pinging.Please check the VMs -forgroundcolor Red
+                Add-content -path $OfflineServerPaths -Value $VM
+            }
+}
+
+Write-Host "Script Execution has been completed.Check the output files in the directory D:\Arun" -Forgroundcolor Cyan
