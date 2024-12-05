@@ -34,7 +34,7 @@ Foreach($VM in $Server_List){
             } -ArgumentList $PackageName -ErrorAction Stop
 
           Write-host  "  Package $Package_Name has been uninstall successfully from server $VM -forgroundcolor -Green
-          Add-content -Path $UninstalledServerPaths -Value $VM
+          Add-content -Path $UninstalledServerPaths -Value $VM }
           catch{
                 Write-host  "  Failed to uninstall the package -forgroundcolor -Red
               }
