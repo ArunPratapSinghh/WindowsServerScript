@@ -1,4 +1,4 @@
-####WINDOWS SERVERS DETAILS#####
+####WINDOWS SERVERS DETAILS########
 
 #List of Servers from Drive D
 $Server_List = Get-content -Path "D:\Arun\List.txt"
