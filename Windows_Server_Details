@@ -1,0 +1,31 @@
+####WINDOWS SERVERS DETAILS#####
+
+#List of Servers from Drive D
+$Server_List = Get-content -Path "D:\Arun\List.txt"
+
+#For loop to find the Server details 
+Foreach($VM in $Server_List){
+
+          #Check the ping status of servers
+          $Ping_Test = Test-Connection -ComputerName $VM -Count 2 -quiet
+          if($Ping_Test -imatch 'true'){
+          try{    
+                  #Check the details of servers i.e. ServerName, SiteCode,Version,Installdate ,LastBootUpTime,WindowsDirectory
+                  $Server_Details = Get-wmiobject -class Win32_OperatingSystem -ComputerName $VM
+                  Write-Host "Server $VM Details has been found" -Forgroundcolor Cyan
+
+
+              }
+          catch{
+                        Write-Host "Server $VM Details not found. Please check" -ForgroundColor Yellow
+                    }
+}else{
+        Write-Host "Server $VM is not pinging and accessible. Please check" -ForgroundColor Yellow
+}
+$Server_Details |Select PSComputerName,Status ,Name(OSVersion),Caption(OSVersion),FreePhysicalMemory,FreeVirtualMemory,Description,InstallDate,LastBootUpTime,LocalDateTime ,OSArchitecture ,SystemDirectory,WindowsDirectory |
+Out-File -Path D:\Arun\Server_Details.txt -Append
+}
+
+
+
+
