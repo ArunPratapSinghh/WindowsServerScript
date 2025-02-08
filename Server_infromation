@@ -1,0 +1,9 @@
+###########Script for Server information###############
+
+$list = import-csv -path C:\temp\server_list.txt
+
+
+
+
+
+
