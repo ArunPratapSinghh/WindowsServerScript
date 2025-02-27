@@ -1,0 +1,9 @@
+#computer_object_details
+
+$Computer_list = get-content -Path C:\temp\list.txt
+
+foreach($list in $Computer_list){
+
+$Details_Object = Get-ADComputer -identity "$list" -properties * |select Name, DistinguishName
+
+}
