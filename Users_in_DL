@@ -1,0 +1,5 @@
+###Find the user in DL###
+
+$DL_Name = Read-host "Enter the name of DL for which you need to find the users."
+
+$User_list = Get-adgroup -identity $Dl_Name -properties * |select Memberof
