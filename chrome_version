@@ -7,9 +7,10 @@ foreach($VM in $list)
 
   $Chrome_version = Invoke-command -ComputerName $VM -scriptblock {
 
-    Get-Package -Name "Google Chrome" |Select-Object @{Name="ServerName";E={$env:ComputerName}},Name,Version
+                    Get-Package -Name "Google Chrome" |
+                      Select-Object @{Name="ServerName";E={$env:ComputerName}},Name,Version
 
-  } 
+                      } 
 
 }
 
