@@ -1,4 +1,4 @@
-#computer_object_details
+####computer_object_details######
 
 $Computer_list = get-content -Path C:\temp\list.txt
 
