@@ -1,4 +1,4 @@
-########### Chrome Version on Windows Version ##############
+########### Chrome Version on Windows Version ###############
 
 $list = Get-content -Path C:\temp\Server_list.txt
 
