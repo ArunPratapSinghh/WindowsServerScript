@@ -1,5 +1,5 @@
 ###Script for license Check#########
-
+#
 $list = get-content -path ./License_server.txt
 
 #license check
