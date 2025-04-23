@@ -7,8 +7,9 @@ foreach($VM in $list)
 {
   try{
       invoke-command -computername $VM -scriptblock {
-        slmgr.vbs ckms
-`       slmgr.vbs /ato
+        slmgr/vbs /skms  #set KMS server
+        slmgr.vbs /ckms  # clear KMS server
+`       slmgr.vbs /ato   #update the KMS
 }catch{
   write-host "Server is not pinging $VM" -forgroundcolor Red
 
