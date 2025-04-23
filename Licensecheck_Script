@@ -7,7 +7,7 @@ foreach($VM in $list)
 {
   try{
       invoke-command -computername $VM -scriptblock {
-        slmgr/vbs /skms  #set KMS server
+        #slmgr/vbs /skms  ServerName #set KMS server
         slmgr.vbs /ckms  # clear KMS server
 `       slmgr.vbs /ato   #update the KMS
 }catch{
