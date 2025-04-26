@@ -1,4 +1,4 @@
-###Script for Package Details####
+###Script for Package Details######
 
 #list of server
 $list = get-content -path "C:\temp\"
