@@ -1,6 +1,6 @@
 Clear-Host
 
-# New Attached Disk Details
+# ##New Attached Disk Details
 do {
     $RawDisk = Get-Disk | Where-Object { $_.PartitionStyle -eq 'RAW' }
 
