@@ -26,5 +26,5 @@ $Format_Disk = New-Partition -DiskNumber $Number -UseMaximumSize -AssignDriveLet
                     Format-Volume -FileSystem NTFS -AllocationUnitSize $unitSize -Confirm:$false
 
 Write-Host "Total disk in server currently::" -ForegroundColor Green
-#Disk_Details
+###Disk_Details
 Get-Volume |Select-Object DriveLetter,OperationalStatus,HealthStatus,FileSystemType,AllocationUnitSize,Size,SizeRemaining |Sort-Object DriveLetter|Format-Table -AutoSize
